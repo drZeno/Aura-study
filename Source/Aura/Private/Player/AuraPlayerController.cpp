@@ -8,6 +8,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "Engine/LocalPlayer.h"
 #include "EnhancedInputComponent.h"
+#include "Aura/Interaction/EnemyInterface.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 
@@ -36,6 +37,30 @@ void AAuraPlayerController::BeginPlay()
 	SetInputMode(InputModeData);
 }
 
+void AAuraPlayerController::PlayerTick(float DeltaTime)
+{
+	Super::PlayerTick(DeltaTime);
+	CursorTrace();
+	
+}
+
+void AAuraPlayerController::CursorTrace()
+{
+	FHitResult CursorHit;// структура с кучей данных о столкновениях
+	GetHitResultUnderCursor(ECC_Visibility,false, CursorHit);//получаем данный с под курсора. 1. это коллизия. 2 сложные коллизии. 3.куда записывать данные
+	if (!CursorHit.bBlockingHit) return; // если луч ничего не задел то мы выходим из функции
+
+	LastActor = ThisActor;
+	ThisActor = CursorHit.GetActor();
+	if (LastActor != ThisActor)
+	{
+		if (LastActor) LastActor->UnHighLightActor();
+		if (ThisActor) ThisActor->HighLightActor();
+	}
+}
+
+
+
 void AAuraPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
@@ -61,3 +86,5 @@ void AAuraPlayerController::Move(const FInputActionValue& InputActionValue)
 	}
 	
 }
+
+
