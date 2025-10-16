@@ -6,12 +6,21 @@
 #include "Character/AuraCharacterBase.h"
 #include "AuraCharacter.generated.h"
 
-/**
- * 
- */
+class USpringArmComponent;
+class UCameraComponent;
+
 UCLASS()
 class AURA_API AAuraCharacter : public AAuraCharacterBase
 {
 	GENERATED_BODY()
+	AAuraCharacter();
+
+	public:
+	UPROPERTY(EditAnywhere, Category = "Camera")
+	USpringArmComponent* SpringArm;
+	
+	UPROPERTY(EditAnywhere, Category = "Camera")
+	UCameraComponent* Camera;
+
 	
 };
