@@ -44,6 +44,19 @@ void AAuraPlayerController::PlayerTick(float DeltaTime)
 	
 }
 
+
+//Line trace from cursor.
+//1.LastActor is null && ThisActor is null
+//Do nothing
+//2.If Last Actor is null && This Actor is valid
+//- Highlight ThisActor.
+//3.LastActor is valid && ThisActor is null
+//- Unhighlight LastActor
+//4. Both actors are valid, but LastActor != ThisActor
+//- Unhightlight LastActor, and Highlight ThisActor
+//5. Both actors are valid, are the same actor
+//-Do nothing
+
 void AAuraPlayerController::CursorTrace()
 {
 	FHitResult CursorHit;// структура с кучей данных о столкновениях

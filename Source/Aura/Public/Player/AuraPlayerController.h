@@ -24,10 +24,7 @@ class AURA_API AAuraPlayerController : public APlayerController
 	virtual void SetupInputComponent() override;
 
 
-
-
 	private:
-
 	
 	UPROPERTY(EditAnywhere, Category = "Input Aura")
 	TObjectPtr<UInputMappingContext> AuraContext;
@@ -38,7 +35,6 @@ class AURA_API AAuraPlayerController : public APlayerController
 	void Move(const FInputActionValue& InputActionValue);
 
 	void CursorTrace();
-
 	TScriptInterface<IEnemyInterface> LastActor;
 	TScriptInterface<IEnemyInterface> ThisActor;
 
